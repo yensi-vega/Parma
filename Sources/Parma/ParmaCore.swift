@@ -157,6 +157,11 @@ extension ParmaCore: XMLParserDelegate {
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         let element = Element.element(elementName)
         
+        linkElementComposer.destination.map {
+            // Update foundCharacters with an embedded link to leverage SwiftUI handle it
+            context.foundCharacters = "[\(context.foundCharacters)](\($0))"
+        }
+        
         if element.isInline {
             if let text = inlineComposers[element]?.text(in: context, render: render) {
                 if let superEl = context.superElement, superEl.isInline {

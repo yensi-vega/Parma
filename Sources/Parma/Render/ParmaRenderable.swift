@@ -69,7 +69,7 @@ public protocol ParmaRenderable {
 // MARK: - Default render style
 extension ParmaRenderable {
     public func plainText(_ text: String) -> Text {
-        Text(text)
+        Text(.init(text))
     }
     
     public func strong(textView: Text) -> Text {
